@@ -2,22 +2,54 @@ import { User, Clock, Plus, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } from "@/components/ui/drawer";
+import { Post } from "./Footer/Post";
+import Pending from "./Footer/Pending";
+import {useDispatch,useSelector} from 'react-redux'
+
+
+
+
+interface footerLay {
+  footerOverlay: string;
+
+}
 
 const MobileNavigation = () => {
   const location = useLocation();
   const [activeDrawer, setActiveDrawer] = useState<string | null>(null);
+  const[myValue,setValue]=useState("")
+   const dispatch = useDispatch()
+       // const  Value=useSelector((state)=>state.footerOverlay)
+        const footerLay: footerLay = useSelector<footerLay>((state) => state.footerOverlay);
+
+      const handleChange = ( newValue:string) => {
+        setActiveDrawer(newValue)
+             dispatch({type:"footerOverlay",payload:newValue})
+             setValue(newValue);
+        
+
+       // setHeight("h-[50px]");
+  
+      console.log(newValue)
+
+    };
+
+
+
+
+
 
   const navItems = [
     {
       icon: User,
       label: "Account",
-      id: "account",
+      id: 'account',
       isActive: location.pathname === "/account",
     },
     {
       icon: Clock,
       label: "Pending",
-      id: "pending",
+      id: 'pending',
       isActive: location.pathname === "/pending",
     },
     {
@@ -70,27 +102,9 @@ const MobileNavigation = () => {
           title: "Pending Applications",
           description: "Track your job applications",
           content: (
-            <div className="p-6 space-y-4">
-              <div className="space-y-3">
-                <div className="p-4 bg-card border rounded-lg">
-                  <h4 className="font-medium">Frontend Developer</h4>
-                  <p className="text-sm text-muted-foreground">Applied 2 days ago</p>
-                  <div className="mt-2">
-                    <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">
-                      Under Review
-                    </span>
-                  </div>
-                </div>
-                <div className="p-4 bg-card border rounded-lg">
-                  <h4 className="font-medium">UI/UX Designer</h4>
-                  <p className="text-sm text-muted-foreground">Applied 5 days ago</p>
-                  <div className="mt-2">
-                    <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                      Interview Scheduled
-                    </span>
-                  </div>
-                </div>
-              </div>
+            <div className="p-6 space-y-4 overflow-y-auto">
+              <Pending/>
+          
             </div>
           )
         };
@@ -100,35 +114,7 @@ const MobileNavigation = () => {
           description: "Create a new job posting",
           content: (
             <div className="p-6 space-y-4">
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Job Title</label>
-                  <input 
-                    type="text" 
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="e.g. Senior React Developer"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Company</label>
-                  <input 
-                    type="text" 
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Company name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Location</label>
-                  <input 
-                    type="text" 
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="e.g. Remote, New York"
-                  />
-                </div>
-                <button className="w-full bg-gradient-primary text-primary-foreground py-3 rounded-lg font-medium hover:opacity-90 transition-opacity">
-                  Continue
-                </button>
-              </div>
+            <Post/>
             </div>
           )
         };
@@ -178,7 +164,7 @@ const MobileNavigation = () => {
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveDrawer(item.id)}
+                  onClick={() => handleChange(item.id)}
                   className={`flex flex-col items-center justify-center py-2 px-3 rounded-lg transition-all duration-200 ${
                     activeDrawer === item.id
                       ? "bg-primary text-primary-foreground shadow-soft"
@@ -201,7 +187,7 @@ const MobileNavigation = () => {
           <Drawer
             key={item.id}
             open={activeDrawer === item.id}
-            onOpenChange={(open) => !open && setActiveDrawer(null)}
+            onOpenChange={(open) => !open && handleChange("null")}
           >
             <DrawerContent className="h-[600px] transition-transform duration-500 ease-out">
               <DrawerHeader>

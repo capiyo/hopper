@@ -74,9 +74,8 @@ const Index = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 md:mb-8">
-          {sampleJobs.map((job, index) => (
-            <JobCard key={index} {...job} />
-          ))}
+          
+            <JobCard />
         </div>
       </section>
 

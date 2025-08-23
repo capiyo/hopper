@@ -1,4 +1,4 @@
-import { MapPin, Clock, DollarSign, Building2,ThumbsUp } from "lucide-react";
+import { MapPin, Clock, DollarSign, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -13,7 +13,6 @@ interface JobCardProps {
   status:string,
   timePosted:string,
   deadline:string,
-  posterId:string,
 
 
 
@@ -31,16 +30,37 @@ interface JobCardProps {
 
 
 
-const JobCard = () => {
+const Pending = () => {
 
  const [jobs, setJobs] = useState<JobCardProps[]>([]);
-
-
+ const[myId,setMyId]=useState("")
+ const[myname,setMyname]=useState('')
+ const[workerEmail,setWorkerEmail]=useState("")
 
 
  
  
 
+
+useEffect(() => {
+           const token:string = localStorage.getItem("user");
+        const user = JSON.parse(token);
+        //setLoginData(user)  
+        //console.log(user.userId)
+        if(user){
+             setMyId(user._id)
+        setMyname(user.userName)
+       setWorkerEmail(user.userEmail)
+        }
+
+        
+
+      
+       // console.log(LoginContext["userId"])
+       // console.log(typeof(LoginContext))
+        //setBossId(loginData.userId)
+       // console.log(bossId+"The capiyo")
+    }, [])
 
 
 
@@ -103,11 +123,11 @@ const JobCard = () => {
 
 
   return (
-      <div className=' '  >
+      <div className=' overflow-y-auto h-[600px]'  >
             
                       
                            
-            <div className='grid sm:grid-cols-2 md:grid-cols-3  gap-1' >
+            <div className='grid sm:grid-cols-2 md:grid-cols-3  gap-1 overflow-y-auto h-[600px]' >
               {jobs.map((job, key) => <Carda    key={key} jobs={job} />)}
               
 
@@ -122,55 +142,6 @@ const JobCard = () => {
 };
 
 function Carda({jobs}){
-   const[myId,setMyId]=useState("")
- const[myname,setMyname]=useState('')
- const[workerEmail,setWorkerEmail]=useState("")
-
- useEffect(() => {
-            const token:string = localStorage.getItem("user");
-         const user = JSON.parse(token);
-         //setLoginData(user)  
-         //console.log(user.userId)
-         if(user){
-              setMyId(user._id)
-         setMyname(user.userName)
-        setWorkerEmail(user.userEmail)
-         }
- 
-         
- 
-       
-        // console.log(LoginContext["userId"])
-        // console.log(typeof(LoginContext))
-         //setBossId(loginData.userId)
-        // console.log(bossId+"The capiyo")
-     }, [])
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   return(
         <Card className="group hover:shadow-medium transition-all duration-300 animate-slide-up">
@@ -208,27 +179,21 @@ function Carda({jobs}){
           </div>
           <div className="flex items-center gap-1 text-muted-foreground">
             <Clock className="h-4 w-4" />
-            <span>{jobs.deadline}</span>
+            <span>{jobs.budget}</span>
           </div>
         </div>
         
-        <div className="flex gap-2 pt-2 justify-evenly">
-            <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
-            {jobs.posterName}
-          </span>
-         
-
-              <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
-            request
-          </span>
-
-          {myId===jobs.posterId?
-             <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
-            view
-          </span>:    <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
-            <ThumbsUp/>
-            
-          </span>}
+        <div className="flex gap-2 pt-2">
+            <Button variant="outline" size="sm">
+            Capiyo
+          </Button>
+          <Button variant="default" size="sm" className="flex-1 ">
+            show interest
+          </Button>
+          {}
+          <Button variant="outline" size="sm">
+            Save
+          </Button>
         </div>
       </CardContent>
     </Card>
@@ -239,4 +204,4 @@ function Carda({jobs}){
 
 
 
-export default JobCard;
+export default Pending;
