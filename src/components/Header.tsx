@@ -30,6 +30,11 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 
+import {useContext } from 'react'
+import { Form, Link } from 'react-router-dom'
+import { useForm } from "react-hook-form"
+  import { toast } from 'react-hot-toast';
+
 
 
 
@@ -47,14 +52,74 @@ const Header = () => {
 
       const handleChange = () => {
              dispatch({type:"footerOverlay",payload:"post-job"})
-            // setValue(myValue);
-        
-
-       // setHeight("h-[50px]");
-  
-     // console.log(myValue)
+            
 
     };
+
+
+        //const { loginData, setLoginData } = useContext(LoginContext);
+    //const dispatch=useDispatch()
+    //const navigate = useNavigate();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+
+
+
+
+
+        const onSubmit = async (data) => {
+        console.log(data)
+        // send data to backend API
+        fetch("https://solvus-api-4.onrender.com/auth/login", {
+            method: "POST",
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                console.log(result);
+                if (result.success) {
+                    localStorage.setItem("usertoken", result.token)
+                    localStorage.setItem("user", JSON.stringify(result.user));
+
+                   // setLoginData(result.token)
+                    
+                    toast.success('Successfully toasted!')
+                    //navigate('/'); 
+                }
+                else
+                  console.log("hellooo")
+                    ////oast.error(result.error)
+            })
+            .catch((err) => {
+               // toast.error("An error occured")
+                console.log(err);
+            })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     const changeLoging=()=>{
@@ -130,15 +195,17 @@ const Header = () => {
            
           </div>
           
-          <div><Drawer>
+          <div className="space-y-4 space-x-4"><Drawer>
   <DrawerTrigger>login</DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>
       <DrawerTitle>Login to proceed</DrawerTitle>
     </DrawerHeader>
-    <div>
+    <form  className="ml-4 mr-4"  onSubmit={handleSubmit(onSubmit)}>
+    <div className="">
                   <label className="block text-sm font-medium mb-2">email</label>
                   <input 
+                  required {...register("userEmail")} 
                     type="text" 
                     className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder="e.g. Senior React Developer"
@@ -147,7 +214,8 @@ const Header = () => {
                 <div>
                   <label className="block text-sm font-medium mb-2">password</label>
                   <input 
-                    type="text" 
+                  required {...register("userPassword")} 
+                    type="password" 
                     className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     placeholder="Company name"
                   />
@@ -155,12 +223,17 @@ const Header = () => {
                 <div>
                 
                 </div>
-    <DrawerFooter>
-      <Button>Submit</Button>
+                   <DrawerFooter>
+      <Button >Submit</Button>
       <DrawerClose>
-        <Button variant="outline">New User Register</Button>
+        <Button  type="submit" variant="outline">New User Register</Button>
       </DrawerClose>
     </DrawerFooter>
+
+
+
+                </form>
+
   </DrawerContent>
 </Drawer>
 
