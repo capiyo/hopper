@@ -2,6 +2,15 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import JobCard from "@/components/JobCard";
 import MobileNavigation from "@/components/MobileNavigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Drawer } from "@/components/ui/drawer";
 
 const Index = () => {
   const sampleJobs = [
@@ -75,7 +84,7 @@ const Index = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 md:mb-8">
           
-            <JobCard />
+            <JobCard/>
         </div>
       </section>
 

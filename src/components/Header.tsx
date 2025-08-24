@@ -1,9 +1,49 @@
 import { Bell, Menu, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
+import { useCallback ,useEffect,useState} from "react";
+import { 
+  increment, 
+  decrement, 
+  incrementByAmount, 
+  reset,
+  incrementAsync 
+} from '../components/ReduxPages/slices/counterSlice'
+import { useAppDispatch, useAppSelector } from '../components/ReduxPages/reducers/store';
+import { count } from "console";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+
+
+
+
+
+
+
+
 
 const Header = () => {
-  const dispatch=useDispatch()
+//  const dispatch=useDispatch()
+  const dispatch = useAppDispatch();
+  const { value, status } = useAppSelector((state) => state.counter);
+    const [incrementAmount, setIncrementAmount] = useState("post-job");
+    const [login,setLogin]=useState(false)
 
       const handleChange = () => {
              dispatch({type:"footerOverlay",payload:"post-job"})
@@ -17,10 +57,49 @@ const Header = () => {
     };
 
 
+    const changeLoging=()=>{
+      setLogin(!login)
+    }
+
+
+     const handleIncrement = useCallback(() => {
+    dispatch(increment());
+  }, [dispatch]);
+
+  const handleDecrement = useCallback(() => {
+    dispatch(decrement());
+  }, [dispatch]);
+
+ const handleIncrementByAmount = useCallback((string: string) => {
+    dispatch(incrementByAmount(string));
+  }, [dispatch]);
+
+  const handleReset = useCallback(() => {
+    dispatch(reset());
+  }, [dispatch]);
+
+  const handleIncrementAsync = useCallback((amount: number) => {
+    dispatch(incrementAsync(amount));
+  }, [dispatch]);
+
+
+  
 
 
 
 
+
+
+    useEffect(() => {
+      console.log(value)
+      
+        
+         
+            
+
+      
+    }, [value])
+    
 
 
 
@@ -48,8 +127,46 @@ const Header = () => {
               <span className="text-primary-foreground font-bold text-sm">hp</span>
             </div>
             <span className="text-xl text-primary">hopper</span>
-             <span   onClick={handleChange}  className="text-xl  text-primary">login</span>
+           
           </div>
+          
+          <div><Drawer>
+  <DrawerTrigger>login</DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Login to proceed</DrawerTitle>
+    </DrawerHeader>
+    <div>
+                  <label className="block text-sm font-medium mb-2">email</label>
+                  <input 
+                    type="text" 
+                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="e.g. Senior React Developer"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">password</label>
+                  <input 
+                    type="text" 
+                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Company name"
+                  />
+                </div>
+                <div>
+                
+                </div>
+    <DrawerFooter>
+      <Button>Submit</Button>
+      <DrawerClose>
+        <Button variant="outline">New User Register</Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+
+  </div>
+
+          
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">

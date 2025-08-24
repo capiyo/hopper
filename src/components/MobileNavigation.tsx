@@ -6,6 +6,20 @@ import { Post } from "./Footer/Post";
 import Pending from "./Footer/Pending";
 import {useDispatch,useSelector} from 'react-redux'
 
+import { useCallback ,useEffect} from "react";
+import { 
+  increment, 
+  decrement, 
+  incrementByAmount, 
+  reset,
+  incrementAsync 
+} from '../components/ReduxPages/slices/counterSlice'
+import { useAppDispatch, useAppSelector } from '../components/ReduxPages/reducers/store';
+
+
+
+
+
 
 
 
@@ -15,15 +29,20 @@ interface footerLay {
 }
 
 const MobileNavigation = () => {
+
   const location = useLocation();
   const [activeDrawer, setActiveDrawer] = useState<string | null>(null);
   const[myValue,setValue]=useState("")
-   const dispatch = useDispatch()
+//   const dispatch = useDispatch()
        // const  Value=useSelector((state)=>state.footerOverlay)
-        const footerLay: footerLay = useSelector<footerLay>((state) => state.footerOverlay);
+        //const footerLay: footerLay = useSelector<footerLay>((state) => state.footerOverlay);
+          const dispatch = useAppDispatch();
+  const { value, status } = useAppSelector((state) => state.counter);
 
       const handleChange = ( newValue:string) => {
         setActiveDrawer(newValue)
+      
+
              dispatch({type:"footerOverlay",payload:newValue})
              setValue(newValue);
         
@@ -33,6 +52,28 @@ const MobileNavigation = () => {
       console.log(newValue)
 
     };
+const handleIncrement = useCallback(() => {
+    dispatch(increment());
+  }, [dispatch]);
+
+
+
+
+
+
+
+
+
+        useEffect(() => {
+          console.log(value)
+          
+            
+             
+                
+    
+          
+        }, [value])
+        
 
 
 
@@ -67,6 +108,7 @@ const MobileNavigation = () => {
   ];
 
   const getDrawerContent = (id: string) => {
+    console.log(id)
     switch (id) {
       case "account":
         return {

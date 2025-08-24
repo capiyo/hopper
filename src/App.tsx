@@ -9,7 +9,7 @@ import Index from "./pages/Index";
 
 import NotFound from "./pages/NotFound";
 import { reducers } from './components/ReduxPages/reducers';
-import {store} from "./components/ReduxPages/reducers/store.jsx"
+import {store} from "./components/ReduxPages/reducers/store.js"
 
 
 const queryClient = new QueryClient();
