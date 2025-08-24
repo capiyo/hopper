@@ -49,6 +49,14 @@ const Header = () => {
   const { value, status } = useAppSelector((state) => state.counter);
     const [incrementAmount, setIncrementAmount] = useState("post-job");
     const [login,setLogin]=useState(false)
+        const[bossId,setBossId]=useState("")
+    const[posterName,setPosterName]=useState()
+    const[bossPhone,setBossPhone]=useState()
+    const[showLogin,setShowLogin]=useState(false)
+     let timePosted=new Date().toLocaleTimeString()
+    let datePosted=new Date().toLocaleDateString()
+
+
 
       const handleChange = () => {
              dispatch({type:"footerOverlay",payload:"post-job"})
@@ -156,14 +164,24 @@ const Header = () => {
 
 
     useEffect(() => {
-      console.log(value)
+         const  token = localStorage.getItem("user");
+        const user = JSON.parse(token);
+       // setLoginData(user)  
+        //console.log(user.userId)
+        if(user){
+          setShowLogin(true)
+        setBossId(user._id)
+        setPosterName(user.userName)
+        setBossPhone(user.phoneNumber)
+        }
+
       
         
          
             
 
       
-    }, [value])
+    }, [])
     
 
 
@@ -196,7 +214,8 @@ const Header = () => {
           </div>
           
           <div className="space-y-4 space-x-4"><Drawer>
-  <DrawerTrigger>login</DrawerTrigger>
+           {showLogin !==  true?
+  <DrawerTrigger>login</DrawerTrigger>:''}
   <DrawerContent>
     <DrawerHeader>
       <DrawerTitle>Login to proceed</DrawerTitle>

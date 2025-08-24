@@ -78,7 +78,6 @@ const Index = () => {
       {/* Job Listings Section */}
       <section className="container mx-auto px-1 py-2">
         <div className="text-center mb-2">
-          <h2 className="text-sm font-bold text-foreground mb-2">Latest Gigs Opportunities</h2>
           
         </div>
         

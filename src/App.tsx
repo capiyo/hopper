@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 
 import NotFound from "./pages/NotFound";
 import { reducers } from './components/ReduxPages/reducers';
+import { Context } from './components/ContextProvider/Context';
 import {store} from "./components/ReduxPages/reducers/store.js"
 
 
@@ -17,6 +18,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
     <Provider store={store}>
+      <Context>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -30,6 +32,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
+  </Context>
   </Provider>
 );
 
