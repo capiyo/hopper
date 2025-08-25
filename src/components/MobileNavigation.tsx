@@ -144,7 +144,7 @@ const handleIncrement = useCallback(() => {
         };
       case "chats":
         return {
-          title: "Chats",
+          title: "Chat history",
           description: "Your messages and conversations",
           content: (
             <div className="p-6 space-y-4">
