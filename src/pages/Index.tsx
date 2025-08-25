@@ -22,13 +22,14 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background flex-row mr-10   w-screen">
       <div className="flex flex-row">
-        <SidebarProvider>
+       <div className="hidden  md:flex"> <SidebarProvider>
       <AppSidebar />
       <main>
         <SidebarTrigger />
      
       </main>
     </SidebarProvider>
+    </div>
  <div className="flex-col  mr-10">
       <Header />      
       <HeroSection/>
