@@ -20,9 +20,10 @@ const Index = () => {
 
 
   return (
-    <div className="min-h-screen bg-background flex-row mr-10   w-screen">
+    <div className="min-h-screen bg-background flex-row  md:flex  w-screen">
       <div className="flex flex-row">
-       <div className="hidden  md:flex"> <SidebarProvider>
+       <div className=""> 
+        <SidebarProvider>
       <AppSidebar />
       <main>
         <SidebarTrigger />

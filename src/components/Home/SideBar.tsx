@@ -50,7 +50,7 @@ export function AppSidebar() {
   const hasActiveItem = navigationItems.some((item) => isActive(item.url));
 
   return (
-    <Sidebar className="bg-gradient-sidebar border-sidebar-border shadow-soft transition-all duration-300">
+    <Sidebar className="bg-gradient-sidebar border-sidebar-border shadow-soft transition-all duration-30 ">
       <SidebarHeader className="p-6 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-soft">
