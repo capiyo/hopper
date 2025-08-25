@@ -173,7 +173,7 @@ function Carda({jobs}){
 
 
   return(
-        <Card className="justify-evenly group hover:shadow-medium transition-all duration-300 animate-slide-up lg:w-[500px]">
+        <Card className=" md:m-5 justify-evenly group hover:shadow-medium transition-all duration-300 animate-slide-up lg:w-[500px]">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">

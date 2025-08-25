@@ -5,7 +5,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } f
 import { Post } from "./Footer/Post";
 import Pending from "./Footer/Pending";
 import {useDispatch,useSelector} from 'react-redux'
-import { Chats } from "./Footer/ChatsList";
+import { Chats } from "./Footer/Chatslist";
 
 import { useCallback ,useEffect} from "react";
 import { 

@@ -5,6 +5,10 @@ import { LoginContext } from '../ContextProvider/Context';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaMessage, FaEye } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
+import { MapPin, Clock, DollarSign, Building2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {  Card,CardContent, CardHeader } from "@/components/ui/card";
+
 
 // Define TypeScript interfaces
 interface User {
@@ -65,6 +69,7 @@ export const Chats: React.FC = () => {
           .then(res => res.json())
           .then((data: ChatList[]) => {
             setChatlist(data);
+            console.log(chatlist)
           })
           .catch((error: Error) => console.log(error));
       }
@@ -85,23 +90,12 @@ export const Chats: React.FC = () => {
   };
 
   return (
-    <div 
-      className='overflow-y-auto flex-col absolute bottom-10  bg-white'
-      onClick={handleModalClick}
-    >
-      <div className='flex flex-row justify-evenly bg-green-200 rounded-t-lg h-10'>
-        <h1 onClick={setChatPage} className='text-center text-sm flex flex-row ml-2 md:text-sm text-red-300'>
-          <FaMessage/> View
-        </h1>
-        <h1 onClick={closeOverlay} className='text-base text-center cursor-pointer text-green-500'>
-          close
-        </h1>
-      </div>
-      <div className='grid sm:grid-cols-1 md:grid-cols-1 overflow-y-auto container mt-1 mx-auto px-4 bg-white rounded-xl'>
+    
+      <div className='grid sm:grid-cols-1   h-[600px] md:grid-cols-1 overflow-y-auto container mt-1 mx-auto px-4 bg-white rounded-xl'>
         {chatlist.map((people, key) => (
-          <Card key={key} chatlist={people} />
+          <Carda key={key} chatlist={people} />
         ))}
-      </div>
+      
     </div>
   );
 };
@@ -110,7 +104,7 @@ interface CardProps {
   chatlist: ChatList;
 }
 
-const Card: React.FC<CardProps> = ({ chatlist }) => {
+const Carda: React.FC<CardProps> = ({ chatlist }) => {
   const [assign, setAssign] = useState<boolean>(false);
   const [workerId, setWorkerId] = useState<string>('');
   const [posterId, setPosterId] = useState<string>("");
@@ -119,9 +113,9 @@ const Card: React.FC<CardProps> = ({ chatlist }) => {
   const [bossPhone, setBossPhone] = useState<string | undefined>();
   
   const dispatch = useDispatch();
-  const caseId = useSelector((state: RootState) => state.caseData.caseId);
-  const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
-  const mybudget = useSelector((state: RootState) => state.caseData.budget);
+//  const caseId = useSelector((state: RootState) => state.caseData.caseId);
+//  const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
+//  const mybudget = useSelector((state: RootState) => state.caseData.budget);
 
   const [myId, setMyId] = useState<string>("");
   const [posterName, setPostername] = useState<string>("");
@@ -131,7 +125,7 @@ const Card: React.FC<CardProps> = ({ chatlist }) => {
     setAssign(true);
   };
 
-  const getMessApplicantsData = (userName: string, userId: string, userEmail: string): void => {
+/*  const getMessApplicantsData = (userName: string, userId: string, userEmail: string): void => {
     const messageData: MessageData = {
       workerId: userId,
       posterId: myId,
@@ -162,7 +156,7 @@ const Card: React.FC<CardProps> = ({ chatlist }) => {
       setAssign(false);
     });
   };
-
+*/
   useEffect(() => {
     const token = localStorage.getItem("user");
     if (token) {
@@ -192,71 +186,57 @@ const Card: React.FC<CardProps> = ({ chatlist }) => {
     setAssign(false);
   };
 
-  const sendPayments = (username: string, userId: string, userEmail: string): void => {
-    const paymentData: PaymentData = {
-      budget: mybudget,
-      phoneNumber: bossPhone
-    };
 
-    fetch("https://solvus-api-4.onrender.com/payment/stk/push", {
-      method: "POST",
-      headers: {'content-type': 'application/json'},
-      body: JSON.stringify(paymentData)
-    })
-    .then((res) => res.json())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error: Error) => {
-      console.log(error);
-      toast.error("Payment Failed kindly try again later");
-      setAssign(false);
-    });
-  };
-
-  // Placeholder for logoURL - you should define this properly
-  const logoURL = "https://via.placeholder.com/50";
 
   return (
-    <div className='border shadow-lg  rounded-xl flex-row bg-white card'>
-      <div className='flex gap-3'>
-        <div>
-          <img src={logoURL} alt={chatlist.jobTitle} className='rounded-full w-12' />
-        </div>
-        <div>
-          <div className='flex items-center'>
-            <span className='pl-1 text-black'>{chatlist.jobTitle}</span>
-            <Link to={`/current-job/${chatlist.jobId}`}>
-              <div className='lg:block text-blue-900 mt-10'>
-                <div onClick={closeOverlay} className='flex flex-row text-purple-400 sm:text-[9px] font-bold lg:text-base'>
-                  <FaEye/>view
-                </div>
-              </div>
-            </Link>
+<Card className="group hover:shadow-medium transition-all duration-300    animate-slide-up">
+      <CardHeader className="pb-3">
+        <div className="flex items-start justify-between">
+          <div className="space-y-1">
+            <h3 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
+              {chatlist.jobTitle}
+            </h3>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Building2 className="h-4 w-4" />
+              <span className="font-medium">{chatlist.budget}</span>
+            </div>
           </div>
-          <h1 className='font-bold text-sm lg:text-lg text-black'>{chatlist.role}</h1>
+          <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
+            {chatlist.role}
+          </span>
         </div>
-      </div>
-      <div>
-        <p className='text-sm py-1 text-black'>
-          Hasokom is looking for Django developer to work on their api kindly send request
+      </CardHeader>
+       
+      
+      <CardContent className="space-y-4">
+        <p className="text-muted-foreground text-sm line-clamp-2">
+          {chatlist.role}
         </p>
-      </div>
-      <div className='flex justify-between items-center'>
-        <div className='flex justify-center items-center'>
-          <span className='pl-2 text-black'>{chatlist.budget}</span>
+        
+        <div className="flex items-center gap-4 text-sm">
+          <div className="flex items-center gap-1 text-muted-foreground">
+            <MapPin className="h-4 w-4" />
+            <span>Hello we are looking for  Angular developer to check our ui</span>
+          </div>
+          
+          
         </div>
-      </div>
-      <div className='flex flex-row justify-evenly w-100%'>
-        <div>
-          <button className='lg:block bg-green-100 text-black text-sm py-1 px-4 rounded-md'>Ksh 3000</button>
+        
+        <div className="flex gap-2 pt-2">
+            <Button variant="outline" size="sm">
+            capiyo
+          </Button>
+          <Button variant="default" size="sm" className="flex-1 ">
+            live
+          </Button>
+          {}
+          <Button variant="outline" size="sm">
+            view
+          </Button>
         </div>
-        <div>
-          <button onClick={confirmAssign} className='lg:block bg-blue-300 text-black text-sm py-1 px-4 rounded-md'>
-            Live
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+      </CardContent>
+    </Card>
+
+  )
+}
+  
