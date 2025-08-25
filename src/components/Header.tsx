@@ -1,4 +1,4 @@
-import { Bell, Menu, User } from "lucide-react";
+import { Bell, Menu, User,MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
 import { useCallback ,useEffect,useState} from "react";
@@ -34,6 +34,7 @@ import {useContext } from 'react'
 import { Form, Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
   import { toast } from 'react-hot-toast';
+  import { Notifications } from "./Footer/Notifications";
 
 
 
@@ -55,6 +56,7 @@ const Header = () => {
     const[showLogin,setShowLogin]=useState(false)
      let timePosted=new Date().toLocaleTimeString()
     let datePosted=new Date().toLocaleDateString()
+    const[notification,setNotifications]=useState(false)
 
 
 
@@ -63,6 +65,10 @@ const Header = () => {
             
 
     };
+
+    const hanldleNotfications=()=>{
+      setNotifications(true)
+    }
 
 
         //const { loginData, setLoginData } = useContext(LoginContext);
@@ -277,11 +283,61 @@ const Header = () => {
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-3">
+
+          <Drawer>
+           
+  <DrawerTrigger>
+      <div className="flex items-center space-x-3">
             <Button variant="ghost" size="icon" className="relative">
-              <Bell className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-3 w-3 bg-primary rounded-full"></span>
+              <MessageCircle   style={{ color: 'limegreen' }}   className="h-5 w-5 " />
+              <span  onClick={hanldleNotfications} className="absolute -top-1 -right-1 h-3 w-3  rounded-full">2</span>
             </Button>
+            </div>
+            <Notifications/>
+
+
+  </DrawerTrigger>
+
+</Drawer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+        
+           
+          
+          
+
+
             
             <div className="hidden md:flex items-center space-x-2">
               <Button variant="ghost">Sign In</Button>
@@ -289,12 +345,12 @@ const Header = () => {
             </div>
 
             {/* Mobile Menu */}
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="md:hidden right-0">
+              
             </Button>
           </div>
         </div>
-      </div>
+      
     </header>
   );
 };

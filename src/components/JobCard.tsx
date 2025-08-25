@@ -103,11 +103,11 @@ const JobCard = () => {
 
 
   return (
-      <div className=' '  >
+      <div className='flex w-screen '  >
             
                       
                            
-            <div className='grid sm:grid-cols-2 md:grid-cols-3  gap-1' >
+            <div className='grid sm:grid-cols-2 md:grid-cols-3 ' >
               {jobs.map((job, key) => <Carda    key={key} jobs={job} />)}
               
 
@@ -173,7 +173,7 @@ function Carda({jobs}){
 
 
   return(
-        <Card className="group hover:shadow-medium transition-all duration-300 animate-slide-up">
+        <Card className=" m-5 justify-evenly group hover:shadow-medium transition-all duration-300 animate-slide-up lg:w-[500px]">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">

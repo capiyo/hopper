@@ -5,6 +5,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription } f
 import { Post } from "./Footer/Post";
 import Pending from "./Footer/Pending";
 import {useDispatch,useSelector} from 'react-redux'
+import { Chats } from "./Footer/ChatsList";
 
 import { useCallback ,useEffect} from "react";
 import { 
@@ -15,6 +16,7 @@ import {
   incrementAsync 
 } from '../components/ReduxPages/slices/counterSlice'
 import { useAppDispatch, useAppSelector } from '../components/ReduxPages/reducers/store';
+import {Account} from './Footer/Account'
 
 
 
@@ -112,30 +114,10 @@ const handleIncrement = useCallback(() => {
     switch (id) {
       case "account":
         return {
-          title: "Account",
-          description: "Manage your profile and settings",
+        
           content: (
-            <div className="p-6 space-y-4">
-              <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center">
-                  <User className="h-8 w-8 text-primary-foreground" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">John Doe</h3>
-                  <p className="text-muted-foreground">john.doe@example.com</p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <button className="w-full text-left p-3 rounded-lg hover:bg-accent">
-                  Edit Profile
-                </button>
-                <button className="w-full text-left p-3 rounded-lg hover:bg-accent">
-                  Settings
-                </button>
-                <button className="w-full text-left p-3 rounded-lg hover:bg-accent">
-                  Logout
-                </button>
-              </div>
+            <div className="p-6 space-y-4 overflow-y-auto  ">
+            <Account/>
             </div>
           )
         };
@@ -167,26 +149,8 @@ const handleIncrement = useCallback(() => {
           content: (
             <div className="p-6 space-y-4">
               <div className="space-y-3">
-                <div className="flex items-center space-x-3 p-3 hover:bg-accent rounded-lg cursor-pointer">
-                  <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
-                    <span className="text-primary-foreground font-medium">HR</span>
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-medium">TechCorp HR</h4>
-                    <p className="text-sm text-muted-foreground">Thanks for your application...</p>
-                  </div>
-                  <div className="text-xs text-muted-foreground">2h</div>
-                </div>
-                <div className="flex items-center space-x-3 p-3 hover:bg-accent rounded-lg cursor-pointer">
-                  <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
-                    <span className="text-primary-foreground font-medium">JM</span>
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-medium">Jane Manager</h4>
-                    <p className="text-sm text-muted-foreground">Interview scheduled for tomorrow</p>
-                  </div>
-                  <div className="text-xs text-muted-foreground">1d</div>
-                </div>
+                <Chats/>
+                
               </div>
             </div>
           )

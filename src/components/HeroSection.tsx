@@ -1,71 +1,117 @@
-import { Search, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import heroImage from "@/assets/hero-image.jpg";
 
-const HeroSection = () => {
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/Home/SideBar";
+import { Menu } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { 
+  TrendingUp, 
+  Users, 
+  Leaf, 
+  Activity,
+  Calendar,
+  MessageSquare,
+  ArrowUpRight 
+} from "lucide-react";
+
+const stats = [
+  {
+    title: "Total Projects",
+    value: "24",
+    change: "+12%",
+    trend: "up",
+    icon: Activity,
+    description: "Active environmental projects"
+  },
+  {
+    title: "Team Members",
+    value: "156",
+    change: "+8%",
+    trend: "up", 
+    icon: Users,
+    description: "Contributing to sustainability"
+  },
+  {
+    title: "Carbon Saved",
+    value: "2.4T",
+    change: "+23%",
+    trend: "up",
+    icon: Leaf,
+    description: "CO2 equivalent this month"
+  },
+  {
+    title: "Growth Rate",
+    value: "18.2%",
+    change: "+4.1%",
+    trend: "up",
+    icon: TrendingUp,
+    description: "Monthly sustainability metrics"
+  }
+];
+
+const recentActivities = [
+  { action: "New sustainability report generated", time: "2 hours ago", type: "report" },
+  { action: "Team meeting scheduled for green initiatives", time: "4 hours ago", type: "meeting" },
+  { action: "Carbon footprint analysis completed", time: "1 day ago", type: "analysis" },
+  { action: "New eco-friendly supplier added", time: "2 days ago", type: "supplier" }
+];
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export default function HeroSection() {
   return (
-    <section className="relative hidden min-h-[400px] md:min-h-[500px] bg-gradient-hero overflow-hidden">
-      <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt="Professional team collaborating" 
-          className="w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-hero opacity-90"></div>
-      </div>
-      
-      <div className="relative z-10 container mx-auto px-4 py-16 md:py-24">
-        <div className="text-center text-primary-foreground space-y-6 animate-fade-in">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-            Find Your
-            <span className="block text-primary-light">Dream Career</span>
-          </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90">
-            Discover thousands of job opportunities from top companies. Your next career move starts here.
-          </p>
-          
-          <div className="max-w-4xl mx-auto mt-8">
-            <div className="bg-card rounded-lg shadow-strong p-4 md:p-6">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                <div className="md:col-span-5">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-                    <Input 
-                      placeholder="Job title, keywords, or company"
-                      className="pl-10 h-12 text-lg"
-                    />
-                  </div>
-                </div>
-                <div className="md:col-span-4">
-                  <div className="relative">
-                    <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-                    <Input 
-                      placeholder="City, state, or remote"
-                      className="pl-10 h-12 text-lg"
-                    />
-                  </div>
-                </div>
-                <div className="md:col-span-3">
-                  <Button variant="hero" size="lg" className="w-full h-12 text-lg">
-                    Search Jobs
-                  </Button>
-                </div>
-              </div>
-            </div>
+ <div className="space-y-6 hidden md:flex">
+      {/* Welcome Section */}
+      <div className="bg-gradient-primary rounded-2xl p-8 text-primary-foreground shadow-elevated ">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Welcome Hopper gigs</h1>
+            <p className="text-primary-foreground/90 text-lg">
+              Manage your sustainable initiatives and track environmental impact
+            </p>
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-4 mt-8 text-sm opacity-80">
-            <span>Popular searches:</span>
-            <button className="text-primary-light hover:underline">Software Engineer</button>
-            <button className="text-primary-light hover:underline">Product Manager</button>
-            <button className="text-primary-light hover:underline">Data Scientist</button>
-            <button className="text-primary-light hover:underline">Remote Work</button>
+          <div className="hidden md:block">
+            <Leaf className="h-16 w-16 text-primary-foreground/20" />
           </div>
         </div>
       </div>
-    </section>
-  );
-};
 
-export default HeroSection;
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((stat, index) => (
+          <Card key={index} className="bg-gradient-to-br from-background to-sage/30 border-sage hover:shadow-soft transition-all duration-200">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-sm font-medium text-muted-foreground">
+                {stat.title}
+              </CardTitle>
+              <stat.icon className="h-5 w-5 text-primary" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold text-foreground mb-1">
+                {stat.value}
+              </div>
+              <div className="flex items-center space-x-2">
+                <Badge 
+                  variant="secondary" 
+                  className="bg-emerald-light text-forest text-xs"
+                >
+                  <TrendingUp className="h-3 w-3 mr-1" />
+                  {stat.change}
+                </Badge>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">
+                {stat.description}
+              </p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Content Grid */}
+     
+    </div>
+  );
+}

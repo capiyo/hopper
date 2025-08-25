@@ -6,11 +6,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import  {Provider} from 'react-redux'
 import Index from "./pages/Index";
+import Inda from "./pages/Inda";
 
 import NotFound from "./pages/NotFound";
 import { reducers } from './components/ReduxPages/reducers';
 import { Context } from './components/ContextProvider/Context';
 import {store} from "./components/ReduxPages/reducers/store.js"
+
 
 
 const queryClient = new QueryClient();
