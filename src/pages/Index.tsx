@@ -22,7 +22,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background flex-row  md:flex  w-screen">
       <div className="flex flex-row">
-       <div className=""> 
+       <div className="hidden md:flex"> 
         <SidebarProvider>
       <AppSidebar />
       <main>
