@@ -1,4 +1,4 @@
-import { Bell, Menu, User,MessageCircle } from "lucide-react";
+import { Bell, Menu, User,MessageCircle, Code ,MessageCircleCode} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
 import { useCallback ,useEffect,useState} from "react";
@@ -35,6 +35,7 @@ import { Form, Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
   import { toast } from 'react-hot-toast';
   import { Notifications } from "./Footer/Notifications";
+  
 
 
 
@@ -212,10 +213,10 @@ const Header = () => {
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
           <div className="flex items-center justify-between space-x-2">
-            <div className="h-8 w-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">hp</span>
+            <div className="h-5 w-5 bg-gradient-primary rounded-lg flex items-center justify-center">
+              <span className="text-primary-foreground  text-sm">hp</span>
             </div>
-            <span className="text-xl text-primary">hopper</span>
+            <span className="text-sm text-primary">hopper</span>
            
           </div>
           
@@ -289,7 +290,7 @@ const Header = () => {
   <DrawerTrigger>
       <div className="flex items-center space-x-3">
             <Button variant="ghost" size="icon" className="relative">
-              <MessageCircle   style={{ color: 'limegreen' }}   className="h-5 w-5 " />
+              <MessageCircleCode   style={{ color: 'limegreen' }}   className="h-5 w-5 " />
               <span  onClick={hanldleNotfications} className="absolute -top-1 -right-1 h-3 w-3  rounded-full">2</span>
             </Button>
             </div>

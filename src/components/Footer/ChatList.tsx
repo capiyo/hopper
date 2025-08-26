@@ -230,9 +230,17 @@ const Carda: React.FC<CardProps> = ({ chatlist }) => {
             live
           </Button>
           {}
-          <Button variant="outline" size="sm">
-            view
-          </Button>
+        
+             <Link to={`/current-job/${chatlist.jobId}`}>
+                                            <div  className={`lg:block  text-blue-900 `}>
+                                                <div    onClick={closeOverlay} className='flex flex-row  text-purple-400   sm:text-[9px]  font-bold  lg:text-base '>
+                                                    <Button variant="outline" size="sm"><FaEye/>view   </Button>
+    </div>
+                                                </div>
+                                                
+                                        </Link>
+                       
+          
         </div>
       </CardContent>
     </Card>
