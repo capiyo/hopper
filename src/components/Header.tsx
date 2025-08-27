@@ -35,6 +35,7 @@ import { Form, Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
   import { toast } from 'react-hot-toast';
   import { Notifications } from "./Footer/Notifications";
+import { Post } from "./Footer/Post";
   
 
 

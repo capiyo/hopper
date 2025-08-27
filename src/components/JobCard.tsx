@@ -1,6 +1,7 @@
-import { MapPin, Clock, DollarSign, Building2,ThumbsUp } from "lucide-react";
+import { MapPin, Clock, DollarSign, Building2,ThumbsUp,Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 interface JobCardProps {
@@ -173,7 +174,7 @@ function Carda({jobs}){
 
 
   return(
-        <Card className=" md:m-5 justify-evenly group hover:shadow-medium transition-all duration-300 animate-slide-up lg:w-[500px]">
+        <Card className="lg:m-5 justify-evenly group hover:shadow-medium transition-all duration-300 animate-slide-up lg:w-[500px]">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
@@ -223,9 +224,14 @@ function Carda({jobs}){
           </span>
 
           {myId===jobs.posterId?
-             <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
-            view
-          </span>:    <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
+            <Link to={`/current-job/${jobs._id}`}>
+                                                       <div  className={`lg:block  text-blue-900 `}>
+                                                           <div     className='flex flex-row  text-purple-400     lg:text-base '>
+                                                               <Eye/>view   
+               </div>
+                                                           </div>
+                                                           
+                                                   </Link>:    <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
             <ThumbsUp/>
             
           </span>}
