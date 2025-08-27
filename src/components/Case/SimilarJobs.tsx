@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { LoginContext } from '../../components/ContextProvider/Context';
+import { LoginContext } from '../ContextProvider/Context.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Define TypeScript interfaces
 interface User {
-  _id: string;
   userId: string;
   userName: string;
   userEmail: string;
@@ -17,7 +16,7 @@ interface Applicant {
   workerName: string;
   workerEmail: string;
   workerId: string;
-  pSkill: string;
+  pSkill?: string;
   // Add other properties as needed based on your API response
 }
 
@@ -39,12 +38,6 @@ interface PaymentData {
   phoneNumber?: string;
 }
 
-interface UpdateGigStatus {
-  status: string;
-  id: string | undefined;
-  agentId: string;
-}
-
 interface RootState {
   caseData: {
     caseId: string;
@@ -54,7 +47,7 @@ interface RootState {
   // Add other state properties as needed
 }
 
-interface ApplicantsProps {
+interface SimilarJobsProps {
   title?: string;
 }
 
@@ -63,18 +56,21 @@ interface CardProps {
   title?: string;
 }
 
-export const Applicants: React.FC<ApplicantsProps> = ({ title }) => {
+export const SimilarJobs: React.FC<SimilarJobsProps> = ({ title }) => {
   const [applicants, setApplicants] = useState<Applicant[]>([]);
-  const { id } = useParams<{ id: string }>();
   const loginData = useContext(LoginContext);
   const [myId, setMyId] = useState<string>("");
 
   useEffect(() => {
     const token = localStorage.getItem("user");
     if (token) {
-      const user: User = JSON.parse(token);
-      setMyId(user._id);
-      // Note: setLoginData might not work as expected since LoginContext is likely a context object
+      try {
+        const user: User = JSON.parse(token);
+        setMyId(user.userId);
+        // Note: setLoginData might not work as expected since LoginContext is likely a context object
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+      }
     }
   }, []);
 
@@ -91,7 +87,7 @@ export const Applicants: React.FC<ApplicantsProps> = ({ title }) => {
 
   return (
     <div className=''>
-      <h1 className='text-center text-xl md:text-2xl font-bold text-primary'>All Applicants</h1>
+      <h1 className='text-center text-xl md:text-2xl font-bold text-primary mt-8 md:mt-6'>All Applicants</h1>
       <div className='grid sm:grid-cols-1 md:grid-cols-1'>
         {applicants.map((people, key) => (
           <Card key={key} applicants={people} title={title} />
@@ -109,9 +105,8 @@ const Card: React.FC<CardProps> = ({ applicants, title }) => {
   const [loginData, setLoginData] = useState<User | null>(null);
   const [bossPhone, setBossPhone] = useState<string | undefined>();
   
-  const { id } = useParams<{ id: string }>();
- const caseId = useSelector((state: RootState) => state.caseData.caseId);
-const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
+  const caseId = useSelector((state: RootState) => state.caseData.caseId);
+  const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
   const mybudget = useSelector((state: RootState) => state.caseData.budget);
 
   const [myId, setMyId] = useState<string>("");
@@ -132,18 +127,20 @@ const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
       workerName: userName,
       posterName: posterName,
       posterEmail: posterEmail,
-      message: `Congratulations you are assigned the gig of ${caseTitel} from @${posterName}`,
-      status: "unchecked"
+      message: "Congratulations you are assigned the gig of Angular dev from @Capiyo",
+      status: "Started"
     };
 
-    fetch("https://solvus-api-4.onrender.com/case/addNotifications", {
+    fetch("http://localhost:5000/case/addWorkerChats", {
       method: "POST",
       headers: {'content-type': 'application/json'},
       body: JSON.stringify(messageData)
     })
     .then((res) => res.json())
     .then((result) => {
-      changeJobStatus();
+      console.log(result);
+      setAssign(false);
+      toast.success("Notified successfully kindly wait for his reply in your inbox or check thread chat");
     })
     .catch((error: Error) => {
       console.log(error);
@@ -155,12 +152,16 @@ const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
   useEffect(() => {
     const token = localStorage.getItem("user");
     if (token) {
-      const user: User = JSON.parse(token);
-      setMyId(user.userId);
-      setPostername(user.userName);
-      setPosterEMail(user.userEmail);
-      setBossPhone(user.phoneNumber);
-      setLoginData(user);
+      try {
+        const user: User = JSON.parse(token);
+        setMyId(user.userId);
+        setPostername(user.userName);
+        setPosterEMail(user.userEmail);
+        setBossPhone(user.phoneNumber);
+        setLoginData(user);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+      }
     }
   }, []);
 
@@ -178,7 +179,7 @@ const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
       phoneNumber: bossPhone
     };
 
-    fetch("https://solvus-api-4.onrender.com/payment/stk/push", {
+    fetch("http://localhost:5000/payment/stk/push", {
       method: "POST",
       headers: {'content-type': 'application/json'},
       body: JSON.stringify(paymentData)
@@ -186,9 +187,6 @@ const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
     .then((res) => res.json())
     .then((result) => {
       console.log(result);
-      if (result) {
-        getMessApplicantsData(username, userId, userEmail);
-      }
     })
     .catch((error: Error) => {
       console.log(error);
@@ -197,46 +195,17 @@ const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
     });
   };
 
-  const changeJobStatus = (): void => {
-    const updateGigStatus: UpdateGigStatus = {
-      status: "admin",
-      id: id,
-      agentId: myId
-    };
-
-    fetch(`https://solvus-api-4.onrender.com/jobs/current-job/update`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updateGigStatus)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      setAssign(false);
-      console.log('Resource updated successfully:', data);
-    })
-    .catch((error: Error) => {
-      console.error('Error updating resource:', error);
-    });
-  };
-
   return (
-    <div className='border shadow-lg lg:w-[500px] rounded-xl flex-row card'>
+    <div className='border shadow-lg hover:border-green-800 lg:w-[700px] rounded-xl flex-row bg-green-100 card'>
       <div className='flex items-center gap-3'>
         <div>
-          
+          <img src={logoURL} alt={applicants.workerName} className='rounded-full w-12' />
         </div>
         <div>
           <div className='flex items-center'>
-            <span className='pl-1 text-blue-800'>{applicants.workerEmail}</span>
+            <span className='pl-1 text-blue-800'>{applicants.workerName}</span>
           </div>
-          <h1 className='font-bold text-md lg:text-lg'>{applicants.pSkill}</h1>
+          <h1 className='font-bold text-md lg:text-lg'>{applicants.workerEmail}</h1>
         </div>
       </div>
       <div>
@@ -265,14 +234,14 @@ const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
             <div className='flex'>
               <div className='flex flex-row'>
                 <p>
-                  Confirm Payment before assigning gig to{' '}
+                  Confirm Payment before assigning{' '}
                   <span className='font-bold text-red-800'>
                     {`@${applicants.workerName}`}
                   </span>
                   , once assigned No reassigning
                 </p>
               </div>
-           
+              <img src={logoURL} alt='Logo' className='w-12 rounded-full'/>
             </div>
             <div className='flex flex-row justify-evenly w-100%'>
               <div>

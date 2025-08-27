@@ -174,7 +174,7 @@ function Carda({jobs}){
 
 
   return(
-        <Card className="lg:m-5 justify-evenly group hover:shadow-medium transition-all duration-300 animate-slide-up lg:w-[500px]">
+        <Card className="m-1   sm:m-3 justify-evenly group hover:shadow-medium transition-all duration-300 animate-slide-up lg:w-[500px]">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
@@ -226,7 +226,7 @@ function Carda({jobs}){
           {myId===jobs.posterId?
             <Link to={`/current-job/${jobs._id}`}>
                                                        <div  className={`lg:block  text-blue-900 `}>
-                                                           <div     className='flex flex-row  text-purple-400     lg:text-base '>
+                                                           <div     className='flex flex-row  text-purple-400   px-2  bg-accent  font-medium  lg:text-base  py-1 rounded-full'>
                                                                view   
                </div>
                                                            </div>

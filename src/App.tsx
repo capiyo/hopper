@@ -13,6 +13,7 @@ import { reducers } from './components/ReduxPages/reducers';
 import { Context } from './components/ContextProvider/Context';
 import {store} from "./components/ReduxPages/reducers/store.js"
 import { Chats } from "./components/Case/Chats.js";
+import { JobDetails } from "./components/Case/JobDetails.js";
 
 
 
@@ -29,7 +30,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path='/current-job/:id' element={<Chats />}/>
+          <Route path='/current-job/:id' element={<JobDetails/>}/>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
