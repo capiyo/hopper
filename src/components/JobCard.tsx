@@ -227,7 +227,7 @@ function Carda({jobs}){
             <Link to={`/current-job/${jobs._id}`}>
                                                        <div  className={`lg:block  text-blue-900 `}>
                                                            <div     className='flex flex-row  text-purple-400     lg:text-base '>
-                                                               <Eye/>view   
+                                                               view   
                </div>
                                                            </div>
                                                            
