@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import counterReducer from '../slices/counterSlice';
 import userReducer from '../slices/userSlice';
+import caseReducer  from '../slices/caseSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     user: userReducer,
+    caser:caseReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

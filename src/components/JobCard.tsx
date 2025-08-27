@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useDispatch } from 'react-redux';
+import { setCaseData } from "./ReduxPages/slices/caseSlice";
+
+
+
 
 interface JobCardProps {
   jobTitle: string;
@@ -126,6 +131,7 @@ function Carda({jobs}){
    const[myId,setMyId]=useState("")
  const[myname,setMyname]=useState('')
  const[workerEmail,setWorkerEmail]=useState("")
+ const dispatch=useDispatch()
 
  useEffect(() => {
             const token:string = localStorage.getItem("user");
@@ -148,6 +154,12 @@ function Carda({jobs}){
      }, [])
  
  
+     interface CaseData {
+  caseTitle: string;
+  caseId: string;
+  budget:string;
+}
+
  
  
  
@@ -159,13 +171,18 @@ function Carda({jobs}){
 
 
 
+const getGigData = (gigTitle: string, gigId: string, budget: string): void => {
+ 
+  
+  const data: CaseData = {
+    caseTitle: gigTitle,
+    caseId: gigId,
+    budget: budget
+  };
 
-
-
-
-
-
-
+  dispatch(setCaseData(data));
+//  console.log(data);
+};
 
 
 
@@ -226,7 +243,8 @@ function Carda({jobs}){
           {myId===jobs.posterId?
             <Link to={`/current-job/${jobs._id}`}>
                                                        <div  className={`lg:block  text-blue-900 `}>
-                                                           <div     className='flex flex-row  text-purple-400   px-2  bg-accent  font-medium  lg:text-base  py-1 rounded-full'>
+                                                           <div  onClick={()=>getGigData(jobs.jobTitle,jobs.jobID,jobs.budget)} 
+                                                             className='flex flex-row  text-purple-400   px-2  bg-accent  font-medium  lg:text-base  py-1 rounded-full'>
                                                                view   
                </div>
                                                            </div>

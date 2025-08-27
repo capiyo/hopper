@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { LoginContext } from '../../components/ContextProvider/Context';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../ReduxPages/reducers/store'
 
 // Define TypeScript interfaces
 interface User {
@@ -45,14 +46,7 @@ interface UpdateGigStatus {
   agentId: string;
 }
 
-interface RootState {
-  caseData: {
-    caseId: string;
-    budget: string;
-    caseTitle: string;
-  };
-  // Add other state properties as needed
-}
+
 
 interface ApplicantsProps {
   title?: string;
@@ -108,11 +102,14 @@ const Card: React.FC<CardProps> = ({ applicants, title }) => {
   const [workerName, setWorkername] = useState<string>("");
   const [loginData, setLoginData] = useState<User | null>(null);
   const [bossPhone, setBossPhone] = useState<string | undefined>();
+ 
   
   const { id } = useParams<{ id: string }>();
- const caseId = useSelector((state: RootState) => state.caseData.caseId);
-const caseTitel = useSelector((state: RootState) => state.caseData.caseTitle);
-  const mybudget = useSelector((state: RootState) => state.caseData.budget);
+ const caseId = useSelector((state: RootState) => state.caser.caseData.caseId);
+const caseTitel = useSelector((state: RootState) => state.caser.caseData.caseTitle);
+  const mybudget = useSelector((state: RootState) => state.caser.caseData.budget);
+//  const caseData = useSelector((state: RootState) => state.caseData);
+console.log(caseId)
 
   const [myId, setMyId] = useState<string>("");
   const [posterName, setPostername] = useState<string>("");

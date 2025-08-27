@@ -35,7 +35,7 @@ export const counterSlice = createSlice({
       state.value +=1
     },
     incrementByAmount: (state, action: PayloadAction<string>) => {
-      console.log("Idah")
+      
       state.value += action.payload;
     },
     reset: (state) => {
