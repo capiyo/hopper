@@ -289,12 +289,10 @@ const Header = () => {
           <Drawer>
            
   <DrawerTrigger>
-      <div className="flex items-center space-x-3">
-            <Button variant="ghost" size="icon" className="relative">
-              <MessageCircleCode   style={{ color: 'limegreen' }}   className="h-5 w-5 " />
-              <span  onClick={hanldleNotfications} className="absolute -top-1 -right-1 h-3 w-3  rounded-full">2</span>
-            </Button>
-            </div>
+
+           
+            <MessageCircleCode   style={{ color: 'limegreen' }}   className="h-5 w-5 " />
+      
             <Notifications/>
 
 
