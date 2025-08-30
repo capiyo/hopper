@@ -123,8 +123,8 @@ const handleIncrement = useCallback(() => {
         };
       case "pending":
         return {
-          title: "Pending Applications",
-          description: "Track your job applications",
+          title: "Awaiting Amin",
+          description: "apply to be admin,supervise the gig",
           content: (
             <div className="p-6 space-y-4 overflow-y-auto">
               <Pending/>

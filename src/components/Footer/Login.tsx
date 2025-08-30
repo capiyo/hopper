@@ -6,9 +6,9 @@ export const Login = () => {
                 <div>
                   <label className="block text-sm font-medium mb-2">User</label>
                   <input 
-                    type="text" 
+                    type="email" 
                     className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="e.g. Senior React Developer"
+                    placeholder="hopper@gmail.com"
                   />
                 </div>
                 <div>
@@ -19,14 +19,7 @@ export const Login = () => {
                     placeholder="Company name"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Location</label>
-                  <input 
-                    type="text" 
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="e.g. Remote, New York"
-                  />
-                </div>
+                
                 <button className="w-full bg-gradient-primary text-primary-foreground py-3 rounded-lg font-medium hover:opacity-90 transition-opacity">
                   Continue
                 </button>

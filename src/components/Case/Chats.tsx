@@ -141,7 +141,8 @@ export const Chats: React.FC = () => {
              
             </div>
             <div className='flex flex-row'>
-              <Link   to="/" className='mr-7 flex md:flex lg:flex cursor-pointer  hover:text-red-900'>    <div className='family-rubik text-sm  '> <Undo color='green'/> </div></Link> 
+              <Link   to="/" className='mr-7 flex md:flex lg:flex cursor-pointer  hover:text-red-900'>    <div className='family-rubik text-sm  '> <Undo color='green'/> 
+              </div></Link> 
           
               <div className='family-rubik text-sm ml-2' >Admin:Newton</div>
               

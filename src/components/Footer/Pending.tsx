@@ -156,7 +156,7 @@ function Carda({jobs}){
               <span className="font-medium">{jobs.budget}</span>
             </div>
           </div>
-          <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
+          <span className="bg-green-300 text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
             {jobs.location}
           </span>
         </div>
@@ -183,17 +183,16 @@ function Carda({jobs}){
           </div>
         </div>
         
-        <div className="flex gap-2 pt-2">
-            <Button variant="outline" size="sm">
-            Capiyo
-          </Button>
-          <Button variant="default" size="sm" className="flex-1 ">
-            show interest
-          </Button>
-          {}
-          <Button variant="outline" size="sm">
-            Save
-          </Button>
+        <div className="flex gap-2 pt-2 w-full justify-evenly">
+            <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
+            capiyo
+          </span>
+           <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
+          be admin
+          </span>
+          <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
+            view
+          </span>
         </div>
       </CardContent>
     </Card>

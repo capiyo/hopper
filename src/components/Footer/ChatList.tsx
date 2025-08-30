@@ -189,11 +189,11 @@ const Carda: React.FC<CardProps> = ({ chatlist }) => {
 
 
   return (
-<Card className="group hover:shadow-medium transition-all duration-300    animate-slide-up">
-      <CardHeader className="pb-3">
+<Card className="group hover:shadow-medium transition-all duration-300    animate-slide-up mt-2">
+      <CardHeader className="pb-1">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
-            <h3 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">
+            <h3 className="font-semibold text-sm text-primary group-hover:text-primary transition-colors">
               {chatlist.jobTitle}
             </h3>
             <div className="flex items-center gap-2 text-muted-foreground">
@@ -208,7 +208,7 @@ const Carda: React.FC<CardProps> = ({ chatlist }) => {
       </CardHeader>
        
       
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-1">
         <p className="text-muted-foreground text-sm line-clamp-2">
           {chatlist.role}
         </p>
@@ -222,19 +222,18 @@ const Carda: React.FC<CardProps> = ({ chatlist }) => {
           
         </div>
         
-        <div className="flex gap-2 pt-2">
-            <Button variant="outline" size="sm">
+        <div className="flex gap-2 pt-2 w-[300px] justify-between">
+             <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
             capiyo
-          </Button>
-          <Button variant="default" size="sm" className="flex-1 ">
+          </span>
+          <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
             live
-          </Button>
-          {}
+          </span>
         
              <Link to={`/current-job/${chatlist.jobId}`}>
-                                            <div  className={`lg:block  text-blue-900 `}>
-                                                <div    onClick={closeOverlay} className='flex flex-row  text-purple-400   sm:text-[9px]  font-bold  lg:text-base '>
-                                                    <Button variant="outline" size="sm"><FaEye/>view   </Button>
+                                            <div  className={`lg:block  `}>
+                                                <div    onClick={closeOverlay} className='flex flex-row   rounded-full  p-2 bg-accent text-purple-400   sm:text-[9px]  text-sm '>view
+                                                    
     </div>
                                                 </div>
                                                 
