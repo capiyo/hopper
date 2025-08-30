@@ -193,7 +193,7 @@ const Carda: React.FC<CardProps> = ({ chatlist }) => {
       <CardHeader className="pb-1">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
-            <h3 className="font-semibold text-sm text-primary group-hover:text-primary transition-colors">
+            <h3 className="text-sm text-primary group-hover:text-primary transition-colors">
               {chatlist.jobTitle}
             </h3>
             <div className="flex items-center gap-2 text-muted-foreground">

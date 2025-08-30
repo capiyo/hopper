@@ -195,7 +195,7 @@ const getGigData = (gigTitle: string, gigId: string, budget: string): void => {
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
-            <h3 className="font-medium text-sm text-primary group-hover:text-primary transition-colors">
+            <h3 className="text-sm text-primary group-hover:text-primary transition-colors">
               {jobs.jobTitle}
             </h3>
             <div className="flex items-center gap-2 text-muted-foreground">
