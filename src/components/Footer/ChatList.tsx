@@ -232,7 +232,7 @@ const Carda: React.FC<CardProps> = ({ chatlist }) => {
         
              <Link to={`/current-job/${chatlist.jobId}`}>
                                             <div  className={`lg:block  `}>
-                                                <div    onClick={closeOverlay} className='flex flex-row   rounded-full  p-2 bg-accent text-purple-400   sm:text-[9px]  text-sm '>view
+                                                <div    onClick={closeOverlay} className='flex flex-row   rounded-full  p-2 bg-accent text-purple-400    text-sm '>view
                                                     
     </div>
                                                 </div>
