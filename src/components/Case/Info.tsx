@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form';
 import { SimilarJobs } from './SimilarJobs';
 import { toast } from 'react-toastify';
 import { LoginContext } from '../ContextProvider/Context';
-import { Applicants } from './Applicants';
+import { Applicants } from './Applicants/Applicants';
+import ContactList from './Applicants/ContactList';
 
 // Define TypeScript interfaces
 interface Job {
@@ -109,7 +110,7 @@ export const Info: React.FC = () => {
   }, []);
 
   return (
-    <div className='lg:w-[700px] container mt-2 mx-auto xl:px-2 px-4'>
+    <div className='lg:w-[700px] container  mx-auto '>
       <div className='mx-auto py-12 md:px-14 px-8 rounded-lg'>
         <div className='flex flex-col lg:flex-row gap-8'></div>
         
@@ -165,7 +166,7 @@ export const Info: React.FC = () => {
         )}
 
         <div className='w-full'>
-          <Applicants title="Django" />
+          <ContactList  />
         </div>
       </div>
     </div>

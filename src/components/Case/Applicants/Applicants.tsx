@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { LoginContext } from '../../components/ContextProvider/Context';
+import { LoginContext } from '../../ContextProvider/Context';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../ReduxPages/reducers/store'
+import { RootState } from '../../ReduxPages/reducers/store'
 
 // Define TypeScript interfaces
 interface User {

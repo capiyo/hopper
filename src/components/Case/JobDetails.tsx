@@ -3,7 +3,8 @@ import { Info } from './Info';
 import { Chats } from './Chats';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { Applicants } from './Applicants';
+import { Applicants } from './Applicants/Applicants';
+import ContactList from './Applicants/ContactList';
 
 // Define TypeScript interfaces
 interface Job {
@@ -68,7 +69,7 @@ export const JobDetails: React.FC = () => {
       </div>
 
       <div className='overflow-y-auto items-center h-screen lg:flex w-[500px] hidden'>
-        <Applicants />
+        <ContactList />
       </div>
     </div>
   );
