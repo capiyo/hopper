@@ -11,31 +11,17 @@ interface ContactCardProps {
 
 const ContactCard = ({ contact, onViewProfile, onAssignTask }: ContactCardProps) => {
   return (
-    <div className="bg-gradient-card p-6 rounded-xl border border-border w-[400px] hover:border-primary/30 transition-all duration-300 hover:shadow-lg animate-fade-in group">
+    <div className="bg-gradient-card rounded-xl border border-border w-[400px] hover:border-primary/30 transition-all duration-300 hover:shadow-lg animate-fade-in group">
       <div className="flex items-start gap-4">
         {/* Avatar Section */}
-        <div className="relative">
-          <div className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground font-semibold text-lg shadow-md">
-            {contact.avatar ? (
-              <img src={contact.avatar} alt={contact.username} className="w-full h-full rounded-full object-cover" />
-            ) : (
-              contact.username.slice(0, 2).toUpperCase()
-            )}
-          </div>
-          <span 
-            className={`absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-card ${
-              contact.status === 'online' ? 'bg-status-online animate-pulse-soft' : 
-              contact.status === 'busy' ? 'bg-status-busy' : 
-              'bg-status-offline'
-            }`} 
-          />
-        </div>
+      
+        
 
         {/* Contact Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             <User className="w-4 h-4 text-primary" />
-            <h3 className="font-semibold text-foreground text-lg group-hover:text-primary transition-colors">
+            <h3 className=" text-foreground text-lg group-hover:text-primary transition-colors">
               {contact.username}
             </h3>
           </div>

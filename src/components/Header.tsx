@@ -56,8 +56,8 @@ const Header = () => {
     const[posterName,setPosterName]=useState()
     const[bossPhone,setBossPhone]=useState()
     const[showLogin,setShowLogin]=useState(false)
-     let timePosted=new Date().toLocaleTimeString()
-    let datePosted=new Date().toLocaleDateString()
+     const timePosted=new Date().toLocaleTimeString()
+    const datePosted=new Date().toLocaleDateString()
     const[notification,setNotifications]=useState(false)
 
 

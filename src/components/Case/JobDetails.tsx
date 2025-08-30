@@ -41,7 +41,7 @@ export const JobDetails: React.FC = () => {
   }, [id, gigStatus]);
 
   return (
-    <div className='flex w-full lg:flex-row justify-evenly h-[1000px]'>
+    <div className='flex w-full lg:flex-row justify-evenly  p-0 h-[1000px]'>
       <div>
         {gigStatus !== "Open" ? (
           <div className='overflow-auto md:flex h-screen'>

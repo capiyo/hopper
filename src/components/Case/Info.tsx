@@ -110,8 +110,8 @@ export const Info: React.FC = () => {
   }, []);
 
   return (
-    <div className='lg:w-[700px] container  mx-auto '>
-      <div className='mx-auto py-12 md:px-14 px-8 rounded-lg'>
+    <div className='lg:w-[700px] container '>
+      <div className='md:px-14  rounded-lg'>
         <div className='flex flex-col lg:flex-row gap-8'></div>
         
         {job ? (
