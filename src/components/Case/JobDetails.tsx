@@ -42,7 +42,7 @@ export const JobDetails: React.FC = () => {
   return (
     <div className='flex w-full lg:flex-row justify-evenly  p-0 h-[1000px]'>
       <div>
-        {status === "Open" ? (
+        {status !== "admin" ? (
           <div className='overflow-auto md:flex h-screen'>
             <Info />
           </div>
