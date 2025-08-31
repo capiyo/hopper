@@ -109,11 +109,11 @@ const JobCard = () => {
 
 
   return (
-      <div className='flex w-screen '  >
+      <div className='flex  w-screen '  >
             
                       
                            
-            <div className='grid sm:grid-cols-2 md:grid-cols-3 ' >
+            <div className='grid sm:grid-cols-2 md:grid-cols-3' >
               {jobs.map((job, key) => <Carda    key={key} jobs={job} />)}
               
 

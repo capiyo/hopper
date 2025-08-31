@@ -31,10 +31,10 @@ const Index = () => {
       </main>
     </SidebarProvider>
     </div>
- <div className="flex-col  mr-10">
+ <div className="flex-col  ">
       <Header />      
-      <HeroSection/>
-      <JobCard/>
+     <div><HeroSection/></div>
+     <div ><JobCard/></div>
       </div>
       </div>
       

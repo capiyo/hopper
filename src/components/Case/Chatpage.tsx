@@ -4,6 +4,7 @@ import { FaArrowAltCircleRight } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { Undo } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { RootState } from '../ReduxPages/reducers/store';
 
 
 // Define types for your data structures
@@ -36,12 +37,7 @@ interface DisplayMessagesProps {
   myId: string;
 }
 
-interface RootState {
-  caseData: {
-    caseTitle: string;
-    budget: string | number;
-  };
-}
+
 
 export const Chats: React.FC = () => {
   const [chats, setChats] = useState<unknown>();
@@ -57,7 +53,8 @@ export const Chats: React.FC = () => {
   const [myId, setMyId] = useState<string>('');
   const [myName, setMyname] = useState<string>('');
 
-//  const caseTitle = useSelector((state: RootState) => state.caseData.caseTitle);
+ const caseTitle = useSelector((state: RootState) => state.caser.caseData.caseTitle);
+// const caseId = useSelector((state: RootState) => state.caser.caseData.caseId);
 //  const mybudget = useSelector((state: RootState) => state.caseData.budget);
   const { id } = useParams<{ id: string }>();
 

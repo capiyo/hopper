@@ -63,7 +63,7 @@ interface LayoutProps {
 
 export default function HeroSection() {
   return (
- <div className="space-y-6 hidden md:flex">
+ <div className=" hidden md:flex ">
       {/* Welcome Section */}
       <div className="bg-gradient-primary rounded-2xl p-8 text-primary-foreground shadow-elevated ">
         <div className="flex items-center justify-between">

@@ -209,7 +209,7 @@ const Header = () => {
 
 
   return (
-    <header className="sticky top-0 z-40 bg-background border-b border-border shadow-soft">
+    <header className="sticky top-0 z-40 bg-background border-b border-border shadow-soft  ">
       <div className="container  px-4">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
@@ -339,9 +339,9 @@ const Header = () => {
 
 
             
-            <div className="hidden md:flex items-center space-x-2">
-              <Button variant="ghost">Sign In</Button>
-              <Button variant="default">Sign Up</Button>
+            <div className="hidden md:flex items-center space-x-2 mr-20">
+      
+              <Button variant="default">capiyo</Button>
             </div>
 
             {/* Mobile Menu */}
