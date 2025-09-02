@@ -80,7 +80,7 @@ export const Notifications: React.FC = () => {
         if (user) {
          // setMyId(user.userId);
          console.log(user.userId)
-          fetch(`https://solvus-api-4.onrender.com/case/getNotifications/${user.userId}`)
+          fetch(`http://localhost:5000/case/getNotifications/${user.userId}`)
             .then(res => res.json())
             .then((data: Notification[]) => {
               setChatlist(data);
@@ -115,7 +115,7 @@ export const Notifications: React.FC = () => {
     <DrawerHeader>unread notifications</DrawerHeader>
     
     <div 
-      className='cursor-pointer w-[400px] overflow-y-auto flex-col absolute bottom-10 h-[300px] bg-white'
+      className='lgw-[400px]      sm:w-screen overflow-y-auto flex-col absolute bottom-10  h-[600px] bg-white'
       onClick={handleModalClick}
     >
       

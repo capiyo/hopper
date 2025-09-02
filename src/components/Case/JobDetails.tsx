@@ -40,18 +40,18 @@ export const JobDetails: React.FC = () => {
   }, [id, gigStatus]);
 
   return (
-    <div className='flex w-full lg:flex-row justify-evenly  p-2 h-[1000px]'>
+    <div className='flex w-full lg:flex-row justify-evenly   h-[1000px]'>
       <div>
         {status?
 
 
         <div>
         {status==="Open" ? (
-          <div>
+          <div  className='overflow-auto md:flex h-screen'>
           <div className='overflow-auto md:flex h-screen '>
             <Info />
           </div>
-           <div className='overflow-auto md:flex h-screen hidden'>
+           <div className='overflow-auto md:flex  lg:flex h-screen hidden'>
             <Info />
           </div>
           </div>

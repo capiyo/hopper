@@ -4,6 +4,12 @@ import { toast } from 'react-toastify';
 import { LoginContext } from '../../ContextProvider/Context';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../ReduxPages/reducers/store'
+import { Contact } from "@/pages/types/Contact";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { User, Mail, Briefcase, Eye } from "lucide-react";
+import { useToast } from '@/hooks/use-toast';
+
 
 // Define TypeScript interfaces
 interface User {
@@ -133,7 +139,7 @@ console.log(caseId)
       status: "unchecked"
     };
 
-    fetch("https://solvus-api-4.onrender.com/case/addNotifications", {
+    fetch("https://solvus-api-4.onrender.com/case/addNotification", {
       method: "POST",
       headers: {'content-type': 'application/json'},
       body: JSON.stringify(messageData)
@@ -216,6 +222,7 @@ console.log(caseId)
     })
     .then(data => {
       setAssign(false);
+      
       console.log('Resource updated successfully:', data);
     })
     .catch((error: Error) => {
@@ -224,70 +231,55 @@ console.log(caseId)
   };
 
   return (
-    <div className='border shadow-lg lg:w-[500px] rounded-xl flex-row card'>
-      <div className='flex items-center gap-3'>
-        <div>
+  <div className="bg-gradient-card rounded-xl border border-border mt-1 md:w-[500px]  p-2 sm:w-screen hover:border-primary/30 transition-all duration-300 hover:shadow-lg animate-fade-in group">
+      <div className="flex items-start gap-4">
+        {/* Avatar Section */}
+      
+        
+
+        {/* Contact Info */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1">
+            <User className="w-4 h-4 text-primary" />
+            <h3 className=" text-foreground text-lg group-hover:text-primary transition-colors">
+              {applicants.workerName}
+            </h3>
+          </div>
           
-        </div>
-        <div>
-          <div className='flex items-center'>
-            <span className='pl-1 text-blue-800'>{applicants.workerEmail}</span>
+          <div className="flex items-center gap-2 mb-3 text-muted-foreground">
+            <Mail className="w-4 h-4" />
+            <p className="text-sm truncate">{applicants.workerEmail}</p>
           </div>
-          <h1 className='font-bold text-md lg:text-lg'>{applicants.pSkill}</h1>
-        </div>
-      </div>
-      <div>
-        <p className='text-sm py-4'>{applicants.workerEmail}</p>
-      </div>
-      <div className='flex justify-between items-center'>
-        <div className='flex justify-center items-center'>
-          <span className='pl-2'>{applicants.workerEmail}</span>
-        </div>
-      </div>
-      <div className='flex flex-row justify-evenly w-100%'>
-        <div>
-          <button className='lg:block bg-green-500 text-white text-sm py-1 px-4 rounded-md'>
-            View Profile
-          </button>
-        </div>
-        <div>
-          <button onClick={confirmAssign} className='lg:block bg-green-500 text-white text-sm py-1 px-4 rounded-md'>
-            Assign task
-          </button>
-        </div>
-      </div>
-      <div>
-        {assign && (
-          <div className='flex bg-white flex-col p-2 rounded-xl -rotate-20 sticky'>
-            <div className='flex'>
-              <div className='flex flex-row'>
-                <p>
-                  Confirm Payment before assigning gig to{' '}
-                  <span className='font-bold text-red-800'>
-                    {`@${applicants.workerName}`}
-                  </span>
-                  , once assigned No reassigning
-                </p>
-              </div>
-           
-            </div>
-            <div className='flex flex-row justify-evenly w-100%'>
-              <div>
-                <button onClick={cancelAssign} className='lg:block bg-primary text-white text-sm py-1 px-4 rounded-md'>
-                  Cancel
-                </button>
-              </div>
-              <div>
-                <button 
-                  onClick={() => sendPayments(applicants.workerName, applicants.workerId, applicants.workerEmail)}
-                  className='lg:block bg-primary text-white text-sm py-1 px-4 rounded-md'
-                >
-                  Confirm
-                </button>
-              </div>
-            </div>
+
+          <div className="flex items-center gap-2 mb-4">
+            <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
+              <Briefcase className="w-3 h-3 mr-1" />
+              {applicants.pSkill}Angular dev here
+            </Badge>
           </div>
-        )}
+
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            <Button 
+              variant="profile" 
+              size="sm" 
+              
+              className="flex-1"
+            >
+              <Eye className="w-4 h-4" />
+              view profile
+            </Button>
+            <Button 
+              variant="task" 
+              size="sm" 
+              onClick={()=>sendPayments(applicants.workerName,applicants.workerId,applicants.workerEmail)}
+              className="flex-1"
+            >
+              <Briefcase className="w-4 h-4" />
+              assign  task
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

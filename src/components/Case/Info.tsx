@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { LoginContext } from '../ContextProvider/Context';
 import { Applicants } from './Applicants/Applicants';
 import ContactList from './Applicants/ContactList';
+import { Undo } from 'lucide-react'; 
 
 // Define TypeScript interfaces
 interface Job {
@@ -110,9 +111,13 @@ export const Info: React.FC = () => {
   }, []);
 
   return (
-    <div className='lg:w-[700px] container '>
-      <div className='md:px-14  rounded-lg'>
+    <div className='lg:w-[700px] container w-full '>
+      <div className='rounded-lg'>
         <div className='flex flex-col lg:flex-row gap-8'></div>
+           <Link   to="/" className=' flex md:flex lg:flex cursor-pointer  hover:text-red-900'>    
+           <div className='family-rubik text-sm  '> <Undo color='green'/> 
+                      </div></Link> 
+                  
         
         {job ? (
           <div className='w-full'>
@@ -121,7 +126,7 @@ export const Info: React.FC = () => {
               
               <div className='mx-4 my-3 text-center md:text-left md:my-0'>
                 <h1 className='text-xl md:text-2xl font-bold'>{job.jobTitle}</h1>
-                <p className='text-secondary'>Solvus.com</p>
+                <p className='text-secondary'>hopper.com</p>
                 <p className='text-sm text-gray-700'>Posted: {job.postedDate}</p>
               </div>
             </div>
@@ -140,8 +145,8 @@ export const Info: React.FC = () => {
                 <h2 className='text-xs md:text-md font-semibold text-gray-700'>Location</h2>
                 <p className='text-sm md:text-lg font-bold'>{job.location}</p>
               </div>
-              <div className='bg-green-300 rounded-lg py-4 md:py-5 text-center'>
-                <h2 className='text-xs md:text-md font-semibold text-gray-700'>Applicants</h2>
+              <div className='bg-background rounded-lg py-4 md:py-5 text-center'>
+                <h2 className='text-xs md:text-md font-semibold text-gray-400'>Applicants</h2>
                 <p className='text-sm md:text-lg font-bold'>{randomNum}</p>
               </div>
             </div>
@@ -156,7 +161,7 @@ export const Info: React.FC = () => {
             </div>
 
             <div className='flex justify-center'>
-              <button onClick={opener} className='block bg-green-300 text-white text-md py-2 px-12 md:px-16 rounded-md'>
+              <button onClick={opener} className='block bg-background text-white text-md py-2 px-12 md:px-16 rounded-md'>
                 {label} Applicants
               </button>
             </div>
@@ -166,7 +171,7 @@ export const Info: React.FC = () => {
         )}
 
         <div className='w-full'>
-          <ContactList  />
+          <Applicants />
         </div>
       </div>
     </div>

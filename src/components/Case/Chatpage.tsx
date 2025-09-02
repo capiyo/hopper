@@ -130,7 +130,7 @@ export const Chats: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col lg:w-[700px] relative h-screen p-2'>
+    <div className='flex flex-col lg:w-[700px] relative h-screen  w-full'>
       <div className='flex flex-row'>
         <div className='flex flex-col ml-2 w-100%'>
           <div className='flex flex-col'>
