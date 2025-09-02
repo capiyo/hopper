@@ -11,7 +11,7 @@ interface ContactCardProps {
 
 const ContactCard = ({ contact, onViewProfile, onAssignTask }: ContactCardProps) => {
   return (
-    <div className="bg-gradient-card rounded-xl border border-border w-[400px] hover:border-primary/30 transition-all duration-300 hover:shadow-lg animate-fade-in group">
+    <div className="bg-gradient-card rounded-xl border border-border md:w-[500px]  p-2 sm:w-screen hover:border-primary/30 transition-all duration-300 hover:shadow-lg animate-fade-in group">
       <div className="flex items-start gap-4">
         {/* Avatar Section */}
       

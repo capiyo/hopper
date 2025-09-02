@@ -40,36 +40,40 @@ export const JobDetails: React.FC = () => {
   }, [id, gigStatus]);
 
   return (
-    <div className='flex w-full lg:flex-row justify-evenly  p-0 h-[1000px]'>
+    <div className='flex w-full lg:flex-row justify-evenly  p-2 h-[1000px]'>
       <div>
-        {status !== "admin" ? (
-          <div className='overflow-auto md:flex h-screen'>
-            <Info />
-          </div>
-        ) : (
-          <div className='overflow-auto md:flex h-screen'>
-            <Chats/>
-          </div>
-        )}
-      </div>
+        {status?
 
-      <div className="flex flex-col justify-evenly">
-        {status === "Open" ? (
-          <div className='overflow-auto md:flex hidden h-screen'>
-            <Info />
-          </div>
-        ) : (
+
+        <div>
+        {status==="Open" ? (
           <div>
-            <div className='overflow-auto border-r-4 sm:w-screen lg:w-[600px] hidden md:flex'>
-              <Info />
-            </div>
+          <div className='overflow-auto md:flex h-screen '>
+            <Info />
+          </div>
+           <div className='overflow-auto md:flex h-screen hidden'>
+            <Info />
+          </div>
+          </div>
+        ) : (
+          <div className='overflow-auto md:flex h-screen'>
+          <div className='overflow-auto hidden md:flex' >
+            <Info/>
+            
+          </div>
+           <div className='overflow-auto' >
+            <Chats/>
+            
+          </div>
           </div>
         )}
+        </div>:<div>Loading ...</div>}
       </div>
 
-      <div className='overflow-y-auto items-center h-screen lg:flex w-[500px] hidden'>
-        <ContactList />
-      </div>
+
+
+     
+     
     </div>
   );
 };

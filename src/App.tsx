@@ -12,7 +12,6 @@ import NotFound from "./pages/NotFound";
 import { reducers } from './components/ReduxPages/reducers';
 import { Context } from './components/ContextProvider/Context';
 import {store} from "./components/ReduxPages/reducers/store.js"
-import { Chats } from "./components/Case/Chatpage.tsx/index.js";
 import { JobDetails } from "./components/Case/JobDetails.js";
 
 

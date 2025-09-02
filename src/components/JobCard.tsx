@@ -188,6 +188,10 @@ function Carda({jobs}){
         })
         .then((res) => res.json())
         .then((result) => {
+           toast({
+      title: "Agent Request",
+      description: `Your job request is submitted successfully`,
+    });
             console.log(result);
             
 
@@ -198,7 +202,7 @@ function Carda({jobs}){
             console.log(error);
             toast({
       title: "Agent Request",
-      description: `Your job request is submitted successfully`,
+      description: `Error occurred`,
     });
         });
 
