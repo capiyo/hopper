@@ -27,12 +27,13 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
+import loga from "../../assets/laptop.jpeg"
 
 const navigationItems = [
-  { title: "Dashboard", url: "/", icon: Home },
-  { title: "Analytics", url: "/analytics", icon: BarChart3 },
-  { title: "Team", url: "/team", icon: Users },
-  { title: "Documents", url: "/documents", icon: FileText },
+  { title: "Account", icon: Home },
+  { title: "Pending", icon: BarChart3 },
+  { title: "Post", icon: Users },
+  { title: "Softwawre", url: "/documents", icon: FileText },
   { title: "Calendar", url: "/calendar", icon: Calendar },
   { title: "Messages", url: "/messages", icon: MessageSquare },
   { title: "Products", url: "/products", icon: ShoppingBag },
@@ -46,6 +47,11 @@ export function AppSidebar() {
   const location = useLocation();
   const currentPath = location.pathname;
 
+   const handleClick = () => {
+    console.log('i love idah')
+
+  };
+
   const isActive = (path: string) => currentPath === path;
   const hasActiveItem = navigationItems.some((item) => isActive(item.url));
 
@@ -53,16 +59,17 @@ export function AppSidebar() {
     <Sidebar className="bg-gradient-sidebar border-sidebar-border shadow-soft transition-all duration-30 ">
       <SidebarHeader className="p-6 border-b border-sidebar-border">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-soft">
-            <Leaf className="h-6 w-6 text-primary-foreground" />
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-soft">
+            <img  src={loga}  className="rounded-full"/>
+      
           </div>
           {open && (
             <div className="flex flex-col">
               <h2 className="text-lg font-bold text-sidebar-foreground">
-                hopper
+                @capiyo
               </h2>
               <p className="text-xs text-muted-foreground">
-                trust and  quality
+                engineercpiyo@gmail.com
               </p>
             </div>
           )}
@@ -81,30 +88,31 @@ export function AppSidebar() {
                 const active = isActive(item.url);
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton 
+                    <SidebarMenuButton   
                       asChild 
                       className={`
-                        group relative overflow-hidden rounded-lg transition-all duration-200
+                        group relative overflow-hidden rounded-lg transition-all duration-200 cursor-pointer 
                         ${active 
-                          ? 'bg-gradient-primary text-primary-foreground shadow-soft font-medium' 
+                          ? 'bg-gradient-accent text-primary-foreground shadow-soft font-medium   bg-primary' 
                           : 'hover:bg-gradient-hover hover:text-sidebar-accent-foreground hover:shadow-soft/50'
                         }
                       `}
                     >
-                      <NavLink to={item.url} className="flex items-center gap-3 px-3 py-2.5">
+                      <div className="flex items-center gap-3 px-3 py-2.5">
                         <item.icon className={`
                           h-5 w-5 transition-transform duration-200 group-hover:scale-110
                           ${active ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-sidebar-primary'}
                         `} />
                         {open && (
-                          <span className="text-sm font-medium transition-colors duration-200">
+                          <span className="text-sm font-medium transition-colors duration-200" onClick={handleClick}>
+
                             {item.title}
                           </span>
                         )}
                         {active && (
                           <div className="absolute inset-0 bg-gradient-primary opacity-10 animate-pulse" />
                         )}
-                      </NavLink>
+                      </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );

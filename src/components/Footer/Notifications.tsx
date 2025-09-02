@@ -5,6 +5,7 @@ import { LoginContext } from '../ContextProvider/Context';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaMessage, FaEye } from 'react-icons/fa6';
 import { RootState } from '../ReduxPages/reducers/store';
+import { MessageCircleCode } from 'lucide-react';
 import {
   Drawer,
   DrawerClose,
@@ -77,11 +78,13 @@ export const Notifications: React.FC = () => {
       try {
         const user: User = JSON.parse(token);
         if (user) {
-          setMyId(user.userId);
+         // setMyId(user.userId);
+         console.log(user.userId)
           fetch(`https://solvus-api-4.onrender.com/case/getNotifications/${user.userId}`)
             .then(res => res.json())
             .then((data: Notification[]) => {
               setChatlist(data);
+              console.log(data)
             })
             .catch((error: Error) => console.log(error));
         }
@@ -106,7 +109,8 @@ export const Notifications: React.FC = () => {
 
   return (
     <Drawer>
-  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerTrigger>           <MessageCircleCode   style={{ color: 'limegreen' }}   className="h-5 w-5 " />
+      </DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>unread notifications</DrawerHeader>
     

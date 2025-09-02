@@ -36,6 +36,7 @@ import { useForm } from "react-hook-form"
   import { toast } from 'react-hot-toast';
   import { Notifications } from "./Footer/Notifications";
 import { Post } from "./Footer/Post";
+import { Leaf } from "lucide-react";
   
 
 
@@ -214,9 +215,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
           <div className="flex items-center justify-between space-x-2">
-            <div className="h-5 w-5 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground  text-sm">hp</span>
-            </div>
+              <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-gradient-primary rounded-xl flex items-center justify-center shadow-soft">
+                        <Leaf className="h-6 w-6 text-primary-foreground" />
+                      </div>
+                      </div>
             <span className="text-sm text-primary">hopper</span>
            
           </div>
@@ -291,8 +294,7 @@ const Header = () => {
   <DrawerTrigger>
 
            
-            <MessageCircleCode   style={{ color: 'limegreen' }}   className="h-5 w-5 " />
-      
+ 
             <Notifications/>
 
 
