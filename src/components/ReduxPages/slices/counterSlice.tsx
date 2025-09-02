@@ -35,9 +35,14 @@ export const counterSlice = createSlice({
       state.value +=1
     },
     incrementByAmount: (state, action: PayloadAction<string>) => {
+      console.log("Capiyo")
       
       state.value += action.payload;
     },
+    setdata:(state, action: PayloadAction<string>) => {
+          console.log(action.payload)
+          state.value = action.payload;
+        },
     reset: (state) => {
       state.value = "chats";
     },

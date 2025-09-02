@@ -70,7 +70,7 @@ export default function HeroSection() {
           <div>
             <h1 className="text-3xl font-bold mb-2">Welcome Hopper gigs</h1>
             <p className="text-primary-foreground/90 text-lg">
-              Manage your sustainable initiatives and track environmental impact
+              Post a gig, let admin handle the  manage your gig, get quality work
             </p>
           </div>
           <div className="hidden md:block">

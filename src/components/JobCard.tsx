@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useDispatch } from 'react-redux';
 import { setCaseData } from "./ReduxPages/slices/caseSlice";
+import { UseDispatch,useSelector } from "react-redux";
+import { RootState } from "./ReduxPages/reducers/store";
+import { useToast } from "@/hooks/use-toast";
 
 
 
@@ -38,8 +41,43 @@ interface JobCardProps {
 
 
 const JobCard = () => {
+       const[myId,setMyId]=useState("")
+     const[myName,setMyname]=useState("")
+     const[workerEmail,setWorkerEmail]=useState("")
+
+    const overlay = useSelector((state: RootState) => state.laydata.overlay);
+     const { toast } = useToast();
 
  const [jobs, setJobs] = useState<JobCardProps[]>([]);
+ 
+  
+
+
+useEffect(() => {
+           const token = localStorage.getItem("user");
+        const user = JSON.parse(token);
+        //setLoginData(user)  
+        //console.log(user.userId)
+        if(user){
+             setMyId(user._id)
+        setMyname(user.userName)
+       setWorkerEmail(user.userEmail)
+        }
+
+        
+
+      
+       // console.log(LoginContext["userId"])
+       // console.log(typeof(LoginContext))
+        //setBossId(loginData.userId)
+       // console.log(bossId+"The capiyo")
+    }, [])
+
+
+
+
+
+
 
 
 
@@ -129,9 +167,45 @@ const JobCard = () => {
 
 function Carda({jobs}){
    const[myId,setMyId]=useState("")
- const[myname,setMyname]=useState('')
+ const[myName,setMyname]=useState('')
  const[workerEmail,setWorkerEmail]=useState("")
  const dispatch=useDispatch()
+ const {toast}=useToast()
+  const showRequest=(jobId)=>{
+    const output={
+    "jobId":jobId,
+    "workerName":myName,
+    "workerId":myId,
+    "workerEmail":workerEmail,
+    }
+    
+    
+                fetch("https://solvus-api-4.onrender.com/jobs/add-applicants", {
+            method: "POST",
+            headers: {'content-type' : 'application/json'},
+            body: JSON.stringify(output)
+            
+        })
+        .then((res) => res.json())
+        .then((result) => {
+            console.log(result);
+            
+
+            //setRequest(true)
+          //  window.location.href = '/all-jobs';
+        })
+        .catch((error) => {
+            console.log(error);
+            toast({
+      title: "Agent Request",
+      description: `Your job request is submitted successfully`,
+    });
+        });
+
+    console.log(jobId)
+    console.log(myId)
+    console.log(myName)
+}
 
  useEffect(() => {
             const token:string = localStorage.getItem("user");
@@ -236,7 +310,7 @@ const getGigData = (gigTitle: string, gigId: string, budget: string): void => {
           </span>
          
 
-              <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
+              <span onClick={()=>showRequest(jobs.jobID)} className="bg-accent  cursor-pointer text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
             request
           </span>
 
@@ -244,12 +318,12 @@ const getGigData = (gigTitle: string, gigId: string, budget: string): void => {
             <Link to={`/current-job/${jobs._id}`}>
                                                        <div  className={`lg:block  text-blue-900 `}>
                                                            <div  onClick={()=>getGigData(jobs.jobTitle,jobs.jobID,jobs.budget)} 
-                                                             className='flex flex-row  text-purple-400   px-2  bg-accent  font-medium  lg:text-base  py-1 rounded-full'>
+                                                             className='flex flex-row  text-purple-400   px-2  bg-accent  cursor-pointer  font-medium  lg:text-base  py-1 rounded-full'>
                                                                view   
                </div>
                                                            </div>
                                                            
-                                                   </Link>:    <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
+                                                   </Link>:    <span className="bg-accent   cursor-pointer text-accent-foreground px-2 py-1 rounded-full text-xs font-medium">
             <ThumbsUp/>
             
           </span>}

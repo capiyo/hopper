@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useCallback } from "react";
 import { 
   Home, 
   BarChart3, 
@@ -28,6 +28,9 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import loga from "../../assets/laptop.jpeg"
+import { setLaydata } from "../ReduxPages/slices/overlaySlice";
+import { incrementByAmount } from "../ReduxPages/slices/counterSlice";
+import { useAppDispatch, useAppSelector } from '../ReduxPages/reducers/store';
 
 const navigationItems = [
   { title: "Account", icon: Home },
@@ -46,6 +49,8 @@ export function AppSidebar() {
   const { open } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
+    const dispatch = useAppDispatch();
+  const { value, status } = useAppSelector((state) => state.counter);
 
    const handleClick = () => {
     console.log('i love idah')
@@ -54,6 +59,11 @@ export function AppSidebar() {
 
   const isActive = (path: string) => currentPath === path;
   const hasActiveItem = navigationItems.some((item) => isActive(item.url));
+
+   const handleIncrementByAmount = useCallback((myValue: string) => {
+      dispatch(setLaydata(myValue));
+      //console.log(myValue)
+    }, [dispatch]);
 
   return (
     <Sidebar className="bg-gradient-sidebar border-sidebar-border shadow-soft transition-all duration-30 ">
@@ -104,7 +114,7 @@ export function AppSidebar() {
                           ${active ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-sidebar-primary'}
                         `} />
                         {open && (
-                          <span className="text-sm font-medium transition-colors duration-200" onClick={handleClick}>
+                          <span className="text-sm font-medium transition-colors duration-200"  onClick={()=>handleIncrementByAmount(item.title)}>
 
                             {item.title}
                           </span>
