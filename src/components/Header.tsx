@@ -292,10 +292,9 @@ const Header = () => {
           <Drawer>
            
   <DrawerTrigger>
-
-           
+         <Notifications/>          
  
-            <Notifications/>
+       
 
 
   </DrawerTrigger>

@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaMessage, FaEye } from 'react-icons/fa6';
 import { RootState } from '../ReduxPages/reducers/store';
 import { MessageCircleCode } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { User, Mail, Briefcase, Eye } from "lucide-react";
 import {
   Drawer,
   DrawerClose,
@@ -115,7 +118,7 @@ export const Notifications: React.FC = () => {
     <DrawerHeader>unread notifications</DrawerHeader>
     
     <div 
-      className='lgw-[400px]      sm:w-screen overflow-y-auto flex-col absolute bottom-10  h-[600px] bg-white'
+      className='lgw-[400px]      sm:w-screen overflow-y-auto flex-col absolute bottom-10    bg-white'
       onClick={handleModalClick}
     >
       
@@ -293,49 +296,64 @@ const Card: React.FC<CardProps> = ({ chatlist }) => {
   };
 
   return (
-    <div className='border shadow-lg  rounded-xl flex-row bg-white card'>
-      <div className='flex gap-3'>
-        <div>
-        
-        </div>
-        <div>
-          <div className='flex items-center'>
-            <span className='pl-1 text-black'>{chatlist.caseTitle}</span>
-            <div>
-              <div className='lg:block text-blue-900 mt-10'>
-                <div onClick={closeOverlay} className='flex flex-row text-purple-400 sm:text-[9px] font-bold lg:text-base'>
-                  <FaEye/>decline
-                </div>
+
+
+    <div className="bg-gradient-card rounded-xl border border-border lg:w-[500px]  p-2 sm:w-screen hover:border-primary/30 transition-all duration-300 hover:shadow-lg animate-fade-in group">
+          <div className="flex items-start gap-4">
+            {/* Avatar Section */}
+          
+            
+    
+            {/* Contact Info */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <User className="w-4 h-4 text-primary" />
+                <h3 className=" text-foreground text-lg group-hover:text-primary transition-colors">
+            {chatlist.caseTitle}
+                </h3>
               </div>
-            </div>
-          </div>
-          <h1 className='font-bold text-sm lg:text-lg text-black'>{chatlist.budget}</h1>
-        </div>
-      </div>
-      <div>
-        <p className='text-sm py-1 text-black'>{chatlist.message}</p>
-      </div>
-      <div className='flex justify-between items-center'>
-        <div className='flex justify-center items-center'>
-          <span className='pl-2 text-black'>{chatlist.budget}</span>
-        </div>
-      </div>
-      <div className='flex flex-row justify-evenly w-100%'>
-        <div>
-          <button className='lg:block bg-green-100 text-black text-sm py-1 px-4 rounded-md'>
-            Ksh 3000
-          </button>
-        </div>
-        <div>
-          <Link to={`/current-job/${chatlist._id}`}>
+              
+              <div className="flex items-center gap-2 mb-3 text-muted-foreground">
+                <Mail className="w-4 h-4" />
+                <p className="text-sm truncate">{chatlist.message}</p>
+              </div>
+    
+              <div className="flex items-center gap-2 mb-4">
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
+                  <Briefcase className="w-3 h-3 mr-1" />
+              {chatlist.budget}
+                </Badge>
+              </div>
+    
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                <Button 
+                  variant="profile" 
+                  size='sm'
+  
+                  className="flex-1"
+                >
+                  <Eye className="w-4 h-4" />
+                  decline
+                </Button>
+                 <Link to={`/current-job/${chatlist._id}`}>
             <div onClick={() => acceptTask(chatlist._id)} className='lg:block text-blue-900  text-sm'>
-              <div className='flex flex-row text-blue-400 sm:text-[9px] font-bold lg:text-base'>
-                <FaEye/>Accept
+              <div className='flex flex-row text-blue-400 sm:text-[9px]  lg:text-base'>
+                Accept
               </div>
             </div>
           </Link>
+              
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+
+
+
+
+
+
+ 
   );
 };
